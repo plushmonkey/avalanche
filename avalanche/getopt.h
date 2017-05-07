@@ -1,6 +1,8 @@
 #ifndef __GETOPT_H__
 #define __GETOPT_H__
 
+#ifdef _WIN32
+
 extern int opterr;		/* if error message should be printed */
 extern int optind;		/* index into parent argv vector */
 extern int optopt;		/* character checked for validity */
@@ -21,5 +23,9 @@ struct option
 
 int getopt(int argc, char * const argv[], const char* optstring);
 int getopt_long(int argc, char * const argv[], const char *optstring, const struct option *longopts, int *longindex);
+
+#else
+#include <getopt.h>
+#endif
 
 #endif /* __GETOPT_H__ */
