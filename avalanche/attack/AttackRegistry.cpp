@@ -12,7 +12,7 @@ AttackRegistry::AttackRegistry(const MethodRegistry& registry) {
 std::unique_ptr<AttackMethod> AttackRegistry::CreateAttack(const std::string& method, mc::core::Client* client) const {
     std::string lcMethod = method;
 
-    std::transform(lcMethod.begin(), lcMethod.end(), lcMethod.begin(), std::tolower);
+    std::transform(lcMethod.begin(), lcMethod.end(), lcMethod.begin(), ::tolower);
 
     auto iter = m_AttackMethods.find(lcMethod);
 

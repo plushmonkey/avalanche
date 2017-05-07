@@ -2,6 +2,7 @@
 #define AVALANCHE_LOGIN_METHOD_H_
 
 #include <unordered_map>
+#include <vector>
 #include <string>
 #include <mclib/common/Types.h>
 
