@@ -117,7 +117,7 @@ bool Avalanche::Initialize(const OptionMap& options) {
         if (!attack.empty()) {
             std::unique_ptr<AttackMethod> attackMethod = attackRegistry.CreateAttack(attack, instance.GetClient());
 
-            if (!attackNode.isNull()) {
+            if (attackMethod && !attackNode.isNull()) {
                 attackMethod->ReadJSON(attackNode);
             }
 
