@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\attack">
+      <UniqueIdentifier>{a73ad26a-d49d-4743-b367-22afad608dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\login">
+      <UniqueIdentifier>{f2a74322-e827-4f09-b6d1-989e2d855204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\attack">
+      <UniqueIdentifier>{4095a4f6-2254-45ae-8af4-3b89bd11b427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\login">
+      <UniqueIdentifier>{a20b7c69-3c6a-41ee-8bd3-44c809af4c68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,10 +36,55 @@
     <ClCompile Include="getopt_long.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Avalanche.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Instance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="attack\AttackRegistry.cpp">
+      <Filter>Source Files\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="attack\AttackBookEdit.cpp">
+      <Filter>Source Files\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="attack\AttackInteract.cpp">
+      <Filter>Source Files\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="login\LoginFlood.cpp">
+      <Filter>Source Files\login</Filter>
+    </ClCompile>
+    <ClCompile Include="login\LoginMethod.cpp">
+      <Filter>Source Files\login</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Instance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Avalanche.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="attack\AttackBookEdit.h">
+      <Filter>Header Files\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="attack\AttackInteract.h">
+      <Filter>Header Files\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="attack\AttackMethod.h">
+      <Filter>Header Files\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="attack\AttackRegistry.h">
+      <Filter>Header Files\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="login\LoginFlood.h">
+      <Filter>Header Files\login</Filter>
+    </ClInclude>
+    <ClInclude Include="login\LoginMethod.h">
+      <Filter>Header Files\login</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
