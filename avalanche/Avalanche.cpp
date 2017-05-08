@@ -1,5 +1,6 @@
 #include "Avalanche.h"
 #include "login/LoginFlood.h"
+#include "login/LoginSequential.h"
 #include "attack/AttackRegistry.h"
 #include "attack/AttackInteract.h"
 #include "attack/AttackBookEdit.h"
@@ -84,9 +85,12 @@ bool Avalanche::Initialize(const OptionMap& options) {
 
             if (methodName == "flood") {
                 m_LoginMethod = std::make_unique<avalanche::LoginFlood>();
-
-                m_LoginMethod->ReadJSON(loginNode);
+            } else if (methodName == "sequential") {
+                m_LoginMethod = std::make_unique<avalanche::LoginSequential>();
             }
+
+            if (m_LoginMethod)
+                m_LoginMethod->ReadJSON(loginNode);
         }
 
         if (attack.empty()) {

@@ -1,4 +1,4 @@
-#include "LoginFlood.h"
+#include "LoginSequential.h"
 
 #include "../Instance.h"
 
@@ -8,13 +8,37 @@
 
 namespace avalanche {
 
-LoginFlood::LoginFlood()
+struct login_guard : public mc::core::ConnectionListener {
+    mc::core::Connection* connection;
+    bool waiting;
+    bool result;
+
+    login_guard(mc::core::Connection* connection) : connection(connection), waiting(true), result(false) {
+        connection->RegisterListener(this);
+    }
+
+    ~login_guard() {
+        connection->UnregisterListener(this);
+    }
+
+    void OnLogin(bool success) override {
+        result = success;
+        waiting = false;
+    }
+
+    void OnSocketStateChange(mc::network::Socket::Status newStatus) override {
+        result = false;
+        waiting = false;
+    }
+};
+
+LoginSequential::LoginSequential()
     : m_Delay(0)
 {
-
+    
 }
 
-std::size_t LoginFlood::Login(std::vector<Instance>& instances) {
+std::size_t LoginSequential::Login(std::vector<Instance>& instances) {
     std::size_t total = 0;
 
     for (std::size_t i = 0; i < instances.size(); ++i) {
@@ -47,14 +71,24 @@ std::size_t LoginFlood::Login(std::vector<Instance>& instances) {
             continue;
         }
 
-        std::cout << "Successfully logged in instance " << i << std::endl;
-        ++total;
+        login_guard guard(instances[i].GetClient()->GetConnection());
+
+        while (guard.waiting) {
+            instances[i].GetClient()->Update();
+        }
+
+        if (guard.result) {
+            std::cout << "Successfully logged in instance " << i << std::endl;
+            ++total;
+        } else {
+            std::cerr << "Failed to login with instance " << i << std::endl;
+        }
     }
 
     return total;
 }
 
-bool LoginFlood::ReadMethodJSON(const Json::Value& node) {
+bool LoginSequential::ReadMethodJSON(const Json::Value& node) {
     auto&& delayNode = node["delay"];
 
     if (delayNode.isInt())

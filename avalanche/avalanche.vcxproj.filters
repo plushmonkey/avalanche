@@ -57,6 +57,9 @@
     <ClCompile Include="login\LoginMethod.cpp">
       <Filter>Source Files\login</Filter>
     </ClCompile>
+    <ClCompile Include="login\LoginSequential.cpp">
+      <Filter>Source Files\login</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files\login</Filter>
     </ClInclude>
     <ClInclude Include="login\LoginMethod.h">
+      <Filter>Header Files\login</Filter>
+    </ClInclude>
+    <ClInclude Include="login\LoginSequential.h">
       <Filter>Header Files\login</Filter>
     </ClInclude>
   </ItemGroup>
