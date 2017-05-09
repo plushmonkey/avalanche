@@ -25,6 +25,31 @@ This attack method uses CreativeInventoryActionPacket to create an item with blo
 The server will read the xyz of the item and try to load the block entity in the world at that position.  
 There's no range limit on this, so the server can be forced to load/generate chunks that are far away.  
 
+## Authentication Generators  
+### increment
+This will generate usernames with a base name and sequential digits appended.  
+Configuration:
+- `username`: Sets the base name used for generating usernames.
+- `password`: Sets the password used for all generated usernames.
+- `start`: Sets the starting index for generation.
+
+### random
+This will generate random all-lowercase usernames.  
+Configuration:
+- `min`: Sets the minimum length of the username to generate.
+- `max`: Sets the maximum length of the username to generate.
+
+### multi-user
+This will read username:password combinations from a file.  
+Configuration:
+- `filename`: The file that contains the username:password combinations.
+
+### multi-token
+This will read username:accessToken:clientToken:profileId combinations from a file.  
+The profileId isn't required, but it needs to hit the API to fetch it. It will get rate limited faster.  
+Configuration:
+- `filename`: The file that contains the tokens.
+
 ## Examples  
 ```
 ./avalanche --username bot --password pw --server 127.0.0.1:25565
@@ -46,12 +71,16 @@ Spawns in 19 instances that will do the interact attack.
 ```
 Reads the config from basic.json file.
 
-### JSON Example  
+### JSON Examples  
 ```
 {
   "login": {
-    "username": "user",
-    "password": "pw",
+    "generator": {
+      "method": "increment",
+      "username": "user",
+      "password": "pw",
+      "start": 0
+    },
     "server": "127.0.0.1",
     "method": {
       "name": "flood",
@@ -63,6 +92,62 @@ Reads the config from basic.json file.
     "method": "bookedit",
     "send-per-tick": 1,
     "pages": 10000
+  }
+}
+```
+
+```
+{
+  "login": {
+    "generator": {
+      "method": "random",
+      "min": 3,
+      "max": 16
+    },
+    "server": "127.0.0.1",
+    "method": {
+      "name": "sequential",
+      "delay": 5000
+    }
+  },
+  "count": 5,
+  "attack": {
+    "method": "creative-world-lag",
+    "send-per-tick": 30,
+    "send-gamemode": true,
+    "position": {
+      "method": "random",
+      "initial": {
+        "x": 0,
+        "y": 64,
+        "z": 0
+      },
+      "increment": {
+        "x": 10,
+        "z": 10
+      }
+    }
+  }
+}
+```
+
+```
+{
+  "login": {
+    "generator": {
+      "method": "multi-user",
+      "filename": "users.txt"
+    },
+    "server": "127.0.0.1",
+    "method": {
+      "name": "sequential",
+      "delay": 0
+    }
+  },
+  "count": 3,
+  "attack": {
+    "method": "interact",
+    "send-per-tick": 75
   }
 }
 ```

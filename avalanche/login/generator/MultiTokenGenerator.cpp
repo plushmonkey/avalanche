@@ -1,6 +1,7 @@
 #include "MultiTokenGenerator.h"
 
 #include <fstream>
+#include <iostream>
 
 namespace avalanche {
 
@@ -55,7 +56,10 @@ bool MultiTokenGenerator::Initialize(const std::string& filename) {
         }
 
         mc::core::AuthToken token(accessToken, clientToken, profileId);
-        m_Users.emplace_back(username, token);
+        if (token.Validate(username))
+            m_Users.emplace_back(username, token);
+        else
+            std::cerr << "Failed to validate " << username << std::endl;
     }
 
     if (m_Users.empty())
