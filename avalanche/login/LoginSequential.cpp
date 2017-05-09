@@ -57,9 +57,8 @@ std::size_t LoginSequential::Login(std::vector<Instance>& instances) {
             }
         }
 
-        Authenticator authenticator = m_Generator->Generate();
-
         try {
+            Authenticator authenticator = m_Generator->Generate();
             std::cout << "Trying to log in to " << m_Host << ":" << m_Port << " with " << authenticator.GetUsername() << std::endl;
 
             if (!authenticator.Authenticate(instances[i], m_Host, m_Port)) {
@@ -74,7 +73,10 @@ std::size_t LoginSequential::Login(std::vector<Instance>& instances) {
         login_guard guard(instances[i].GetClient()->GetConnection());
 
         while (guard.waiting) {
-            instances[i].GetClient()->Update();
+            auto connState = instances[i].GetClient()->GetConnection()->GetSocketState();
+
+            if (connState == mc::network::Socket::Status::Connected)
+                instances[i].GetClient()->Update();
         }
 
         if (guard.result) {

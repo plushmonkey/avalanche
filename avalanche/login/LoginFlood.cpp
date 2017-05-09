@@ -34,9 +34,8 @@ std::size_t LoginFlood::Login(std::vector<Instance>& instances) {
             }
         }
 
-        Authenticator authenticator = m_Generator->Generate();
-
         try {
+            Authenticator authenticator = m_Generator->Generate();
             std::cout << "Trying to log in to " << m_Host << ":" << m_Port << " with " << authenticator.GetUsername() << std::endl;
 
             if (!authenticator.Authenticate(instances[i], m_Host, m_Port)) {

@@ -3,7 +3,8 @@
 namespace avalanche {
 
 Authenticator::Authenticator(const std::string& username, const mc::core::AuthToken& token)
-    : m_Token(token),
+    : m_Username(username),
+      m_Token(token),
       m_Method(Method::Token)
 {
 

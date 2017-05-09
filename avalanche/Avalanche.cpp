@@ -94,8 +94,12 @@ bool Avalanche::Initialize(const OptionMap& options) {
 
             m_LoginMethod = loginFactory.Create(methodName);
 
-            if (m_LoginMethod)
-                m_LoginMethod->ReadJSON(loginNode);
+            if (m_LoginMethod) {
+                if (!m_LoginMethod->ReadJSON(loginNode)) {
+                    std::cerr << "Failed to read login method JSON." << std::endl;
+                    return false;
+                }
+            }
         }
 
         if (attack.empty()) {

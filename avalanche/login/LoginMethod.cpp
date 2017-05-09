@@ -2,6 +2,8 @@
 
 #include "generator/IncrementalGenerator.h"
 #include "generator/RandomGenerator.h"
+#include "generator/MultiUserGenerator.h"
+#include "generator/MultiTokenGenerator.h"
 #include "../Factory.h"
 #include <json/json.h>
 #include <iostream>
@@ -12,6 +14,8 @@ using GeneratorFactory = Factory<AuthGenerator>;
 static const GeneratorFactory generatorFactory = GeneratorFactory::MethodRegistry {
     { IncrementalGenerator::s_Name, []() -> std::unique_ptr<AuthGenerator> { return std::make_unique<IncrementalGenerator>(); } },
     { RandomGenerator::s_Name, []() -> std::unique_ptr<AuthGenerator> { return std::make_unique<RandomGenerator>(); } },
+    { MultiUserGenerator::s_Name, []() -> std::unique_ptr<AuthGenerator> { return std::make_unique<MultiUserGenerator>(); } },
+    { MultiTokenGenerator::s_Name, []() -> std::unique_ptr<AuthGenerator> { return std::make_unique<MultiTokenGenerator>(); } },
 };
 
 
@@ -48,8 +52,10 @@ bool LoginMethod::ReadJSON(const Json::Value& node) {
         if (generatorMethodNode.isString()) {
             m_Generator = generatorFactory.Create(generatorMethodNode.asString());
 
-            if (m_Generator)
-                m_Generator->ReadJSON(generatorNode);
+            if (m_Generator) {
+                if (!m_Generator->ReadJSON(generatorNode))
+                    return false;
+            }
         }
     }
 

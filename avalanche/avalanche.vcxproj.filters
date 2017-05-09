@@ -75,6 +75,12 @@
     <ClCompile Include="login\Authenticator.cpp">
       <Filter>Source Files\login</Filter>
     </ClCompile>
+    <ClCompile Include="login\generator\MultiTokenGenerator.cpp">
+      <Filter>Source Files\login\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="login\generator\MultiUserGenerator.cpp">
+      <Filter>Source Files\login\generator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">

@@ -93,6 +93,8 @@
     <ClCompile Include="Instance.cpp" />
     <ClCompile Include="login\Authenticator.cpp" />
     <ClCompile Include="login\generator\IncrementalGenerator.cpp" />
+    <ClCompile Include="login\generator\MultiTokenGenerator.cpp" />
+    <ClCompile Include="login\generator\MultiUserGenerator.cpp" />
     <ClCompile Include="login\generator\RandomGenerator.cpp" />
     <ClCompile Include="login\LoginFlood.cpp" />
     <ClCompile Include="login\LoginMethod.cpp" />
