@@ -2,9 +2,9 @@
 A simple cli Minecraft server stress test tool.  
 
 ## Installation  
-Set `connection-throttle: 0` in `bukkit.yml` when using multiple instances.  
-There's currently no delay in the login sequence, so only one instance will get in unless that setting is changed.  
-This setting doesn't need to be changed when using `127.0.0.1` to log in.
+Set `connection-throttle: 0` in `bukkit.yml` when using the multiple instances.  
+A delay can be added to the login sequence if needed.  
+This setting doesn't need to be changed when using `127.0.0.1` to log in. 
 
 ## Attacks  
 ### interact
@@ -15,7 +15,7 @@ Countering the attack is as easy as putting in a packet limiting plugin, such as
 This sends book data with many pages to the MC|BEdit plugin channel.  
 The pages aren't valid JSON, so each page that the server tries to deserialize will throw an exception.  
 One instance is enough to freeze a server up by sending 10000 page book every tick.  
-This can be used to create many 10000 page books. These can be placed in a Shulker Box and used to keep a player from logging in.  
+With enough of these placed in a Shulker Box, the player holding it won't be able to login.  
 This is all possible in Survival mode.  
 
 ### creative-world-lag  
