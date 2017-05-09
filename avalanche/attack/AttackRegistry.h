@@ -37,6 +37,7 @@ public:
         m_AttackMethods.insert(std::make_pair(name, creator));
     }
 
+    bool IsValidAttack(const std::string& method) const { return m_AttackMethods.find(method) != m_AttackMethods.end(); }
     std::unique_ptr<AttackMethod> CreateAttack(const std::string& method, mc::core::Client* client) const;
 };
 

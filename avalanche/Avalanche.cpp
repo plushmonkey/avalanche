@@ -4,6 +4,7 @@
 #include "attack/AttackRegistry.h"
 #include "attack/AttackInteract.h"
 #include "attack/AttackBookEdit.h"
+#include "attack/AttackCreativeWorldLag.h"
 
 #include <fstream>
 #include <memory>
@@ -14,6 +15,7 @@ namespace avalanche {
 static const AttackRegistry attackRegistry = AttackRegistry::MethodRegistry {
     { "interact", [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackInteract>(client); } },
     { "bookedit", [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackBookEdit>(client); } },
+    { "creative-world-lag", [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackCreativeWorldLag>(client); } },
 };
 
 void Avalanche::Run() {
@@ -117,7 +119,11 @@ bool Avalanche::Initialize(const OptionMap& options) {
 
     m_Instances = std::vector<Instance>(count);
 
+    if (attackRegistry.IsValidAttack(attack))
+        std::cout << "attack: " << attack << std::endl;
+
     for (auto&& instance : m_Instances) {
+        instance.GetClient()->GetConnection()->GetSettings().SetLocale(L"en_GB");
         if (!attack.empty()) {
             std::unique_ptr<AttackMethod> attackMethod = attackRegistry.CreateAttack(attack, instance.GetClient());
 

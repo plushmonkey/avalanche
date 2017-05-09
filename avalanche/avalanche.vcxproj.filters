@@ -60,6 +60,9 @@
     <ClCompile Include="login\LoginSequential.cpp">
       <Filter>Source Files\login</Filter>
     </ClCompile>
+    <ClCompile Include="attack\AttackCreativeWorldLag.cpp">
+      <Filter>Source Files\attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -91,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="login\LoginSequential.h">
       <Filter>Header Files\login</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="attack\AttackCreativeWorldLag.h">
+      <Filter>Header Files\attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

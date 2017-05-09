@@ -87,6 +87,7 @@
     <ClCompile Include="attack\AttackBookEdit.cpp" />
     <ClCompile Include="attack\AttackInteract.cpp" />
     <ClCompile Include="attack\AttackRegistry.cpp" />
+    <ClCompile Include="attack\AttackCreativeWorldLag.cpp" />
     <ClCompile Include="getopt.cpp" />
     <ClCompile Include="getopt_long.cpp" />
     <ClCompile Include="Avalanche.cpp" />
@@ -101,12 +102,14 @@
     <ClInclude Include="attack\AttackInteract.h" />
     <ClInclude Include="attack\AttackMethod.h" />
     <ClInclude Include="attack\AttackRegistry.h" />
+    <ClInclude Include="attack\AttackCreativeWorldLag.h" />
     <ClInclude Include="getopt.h" />
     <ClInclude Include="Instance.h" />
     <ClInclude Include="Avalanche.h" />
     <ClInclude Include="login\LoginFlood.h" />
     <ClInclude Include="login\LoginMethod.h" />
     <ClInclude Include="login\LoginSequential.h" />
+    <ClInclude Include="PositionProvider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
