@@ -7,14 +7,23 @@ There's currently no delay in the login sequence, so only one instance will get 
 This setting doesn't need to be changed when using `127.0.0.1` to log in.
 
 ## Attacks  
-### Interact
+### interact
 This will spam the server with block dig packets. This can cause massive lag with WorldEdit permission checks.  
 Countering the attack is as easy as putting in a packet limiting plugin, such as NoCheatPlus.  
 
-### BookEdit
+### bookedit
 This sends book data with many pages to the MC|BEdit plugin channel.  
 The pages aren't valid JSON, so each page that the server tries to deserialize will throw an exception.  
 One instance is enough to freeze a server up by sending 10000 page book every tick.  
+This can be used to create many 10000 page books. These can be placed in a Shulker Box and used to keep a player from logging in.  
+This is all possible in Survival mode.  
+
+### creative-world-lag  
+This method requires creative mode.  
+  
+This attack method uses CreativeInventoryActionPacket to create an item with block entity data in its inventory.  
+The server will read the xyz of the item and try to load the block entity in the world at that position.  
+There's no range limit on this, so the server can be forced to load/generate chunks that are far away.  
 
 ## Examples  
 ```
