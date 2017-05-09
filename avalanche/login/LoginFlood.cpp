@@ -1,7 +1,8 @@
 #include "LoginFlood.h"
 
 #include "../Instance.h"
-
+#include "Authenticator.h"
+#include "generator/IncrementalGenerator.h"
 #include <json/json.h>
 #include <iostream>
 #include <mclib/util/Utility.h>
@@ -20,11 +21,7 @@ std::size_t LoginFlood::Login(std::vector<Instance>& instances) {
     std::size_t total = 0;
 
     for (std::size_t i = 0; i < instances.size(); ++i) {
-        std::string instanceUsername = m_Username;
-
         if (i != 0) {
-            instanceUsername += std::to_string(i);
-
             auto time = mc::util::GetTime();
             // Update previous instances while waiting to log in the next one.
             while (mc::util::GetTime() < time + m_Delay) {
@@ -37,10 +34,12 @@ std::size_t LoginFlood::Login(std::vector<Instance>& instances) {
             }
         }
 
-        try {
-            std::cout << "Trying to log in to " << m_Host << ":" << m_Port << " with " << instanceUsername << ":" << m_Password << std::endl;
+        Authenticator authenticator = m_Generator->Generate();
 
-            if (!instances[i].GetClient()->Login(m_Host, m_Port, instanceUsername, m_Password, mc::core::UpdateMethod::Manual)) {
+        try {
+            std::cout << "Trying to log in to " << m_Host << ":" << m_Port << " with " << authenticator.GetUsername() << std::endl;
+
+            if (!authenticator.Authenticate(instances[i], m_Host, m_Port)) {
                 std::cerr << "Failed to login with instance " << i << std::endl;
                 continue;
             }

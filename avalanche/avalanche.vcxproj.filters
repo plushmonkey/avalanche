@@ -25,6 +25,12 @@
     <Filter Include="Source Files\login">
       <UniqueIdentifier>{a20b7c69-3c6a-41ee-8bd3-44c809af4c68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\login\generator">
+      <UniqueIdentifier>{489d16de-8009-4610-a3a0-b431a8089880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\login\generator">
+      <UniqueIdentifier>{44c581d9-c490-4856-8bb7-920f3b3e879d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -59,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="attack\AttackCreativeWorldLag.cpp">
       <Filter>Source Files\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="login\generator\IncrementalGenerator.cpp">
+      <Filter>Source Files\login\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="login\generator\RandomGenerator.cpp">
+      <Filter>Source Files\login\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="login\Authenticator.cpp">
+      <Filter>Source Files\login</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +112,24 @@
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="login\generator\AuthGenerator.h">
+      <Filter>Header Files\login\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="login\generator\IncrementalGenerator.h">
+      <Filter>Header Files\login\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="login\generator\MultiTokenGenerator.h">
+      <Filter>Header Files\login\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="login\generator\MultiUserGenerator.h">
+      <Filter>Header Files\login\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="login\generator\RandomGenerator.h">
+      <Filter>Header Files\login\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="login\Authenticator.h">
+      <Filter>Header Files\login</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

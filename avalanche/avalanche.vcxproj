@@ -91,6 +91,9 @@
     <ClCompile Include="getopt_long.cpp" />
     <ClCompile Include="Avalanche.cpp" />
     <ClCompile Include="Instance.cpp" />
+    <ClCompile Include="login\Authenticator.cpp" />
+    <ClCompile Include="login\generator\IncrementalGenerator.cpp" />
+    <ClCompile Include="login\generator\RandomGenerator.cpp" />
     <ClCompile Include="login\LoginFlood.cpp" />
     <ClCompile Include="login\LoginMethod.cpp" />
     <ClCompile Include="login\LoginSequential.cpp" />
@@ -104,6 +107,12 @@
     <ClInclude Include="getopt.h" />
     <ClInclude Include="Instance.h" />
     <ClInclude Include="Avalanche.h" />
+    <ClInclude Include="login\generator\AuthGenerator.h" />
+    <ClInclude Include="login\generator\IncrementalGenerator.h" />
+    <ClInclude Include="login\generator\MultiTokenGenerator.h" />
+    <ClInclude Include="login\generator\MultiUserGenerator.h" />
+    <ClInclude Include="login\Authenticator.h" />
+    <ClInclude Include="login\generator\RandomGenerator.h" />
     <ClInclude Include="login\LoginFlood.h" />
     <ClInclude Include="login\LoginMethod.h" />
     <ClInclude Include="login\LoginSequential.h" />

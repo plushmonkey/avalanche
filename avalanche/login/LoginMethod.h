@@ -1,10 +1,13 @@
 #ifndef AVALANCHE_LOGIN_METHOD_H_
 #define AVALANCHE_LOGIN_METHOD_H_
 
+#include <memory>
+#include <string>
 #include <unordered_map>
 #include <vector>
-#include <string>
 #include <mclib/common/Types.h>
+
+#include "generator/AuthGenerator.h"
 
 namespace Json {
 
@@ -18,8 +21,7 @@ class Instance;
 
 class LoginMethod {
 protected:
-    std::string m_Username;
-    std::string m_Password;
+    std::unique_ptr<AuthGenerator> m_Generator;
     std::string m_Host;
     u16 m_Port;
 
