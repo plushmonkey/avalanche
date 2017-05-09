@@ -42,9 +42,6 @@
     <ClCompile Include="Instance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="attack\AttackRegistry.cpp">
-      <Filter>Source Files\attack</Filter>
-    </ClCompile>
     <ClCompile Include="attack\AttackBookEdit.cpp">
       <Filter>Source Files\attack</Filter>
     </ClCompile>
@@ -83,9 +80,6 @@
     <ClInclude Include="attack\AttackMethod.h">
       <Filter>Header Files\attack</Filter>
     </ClInclude>
-    <ClInclude Include="attack\AttackRegistry.h">
-      <Filter>Header Files\attack</Filter>
-    </ClInclude>
     <ClInclude Include="login\LoginFlood.h">
       <Filter>Header Files\login</Filter>
     </ClInclude>
@@ -100,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="attack\AttackCreativeWorldLag.h">
       <Filter>Header Files\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

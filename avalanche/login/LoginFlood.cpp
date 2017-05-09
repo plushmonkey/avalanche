@@ -8,6 +8,8 @@
 
 namespace avalanche {
 
+const char* LoginFlood::s_Name = "flood";
+
 LoginFlood::LoginFlood()
     : m_Delay(0)
 {

@@ -4,6 +4,7 @@
 
 namespace avalanche {
 
+const char* AttackBookEdit::s_Name = "bookedit";
 s32 AttackBookEdit::s_BookPages = 3000;
 s32 AttackBookEdit::s_SendPerTick = 1;
 std::string AttackBookEdit::s_AttackData;
@@ -64,7 +65,7 @@ void AttackBookEdit::OnTick() {
 
 bool AttackBookEdit::ReadJSON(const Json::Value& attackNode) {
     auto&& methodNode = attackNode["method"];
-    if (!methodNode.isString() || methodNode.asString() != "bookedit")
+    if (!methodNode.isString() || methodNode.asString() != s_Name)
         return false;
 
     auto&& pagesNode = attackNode["pages"];
@@ -72,9 +73,9 @@ bool AttackBookEdit::ReadJSON(const Json::Value& attackNode) {
         s_BookPages = pagesNode.asInt();
     }
 
-    auto&& digsPerTickNode = attackNode["send-per-tick"];
-    if (!digsPerTickNode.isNull()) {
-        s_SendPerTick = digsPerTickNode.asInt();
+    auto&& sendPerTickNode = attackNode["send-per-tick"];
+    if (!sendPerTickNode.isNull()) {
+        s_SendPerTick = sendPerTickNode.asInt();
     }
 
     return true;

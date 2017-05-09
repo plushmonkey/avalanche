@@ -6,6 +6,7 @@
 
 namespace avalanche {
 
+const char* AttackCreativeWorldLag::s_Name = "creative-world-lag";
 s32 AttackCreativeWorldLag::s_SendPerTick = 1;
 
 AttackCreativeWorldLag::AttackCreativeWorldLag(mc::core::Client* client)
@@ -63,7 +64,7 @@ void AttackCreativeWorldLag::OnTick() {
 
 bool AttackCreativeWorldLag::ReadJSON(const Json::Value& attackNode) {
     auto&& methodNode = attackNode["method"];
-    if (!methodNode.isString() || methodNode.asString() != "creative-world-lag")
+    if (!methodNode.isString() || methodNode.asString() != s_Name)
         return false;
 
     auto&& sendPerTickNode = attackNode["send-per-tick"];

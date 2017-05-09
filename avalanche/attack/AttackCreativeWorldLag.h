@@ -28,6 +28,8 @@ public:
 
     void OnTick() override;
     bool ReadJSON(const Json::Value& attackNode) override;
+
+    static const char* s_Name;
 };
 
 } // ns avalanche

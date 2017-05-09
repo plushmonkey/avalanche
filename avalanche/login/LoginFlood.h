@@ -15,6 +15,8 @@ public:
     LoginFlood();
 
     std::size_t Login(std::vector<Instance>& instances);
+
+    static const char* s_Name;
 };
 
 } // ns avalanche

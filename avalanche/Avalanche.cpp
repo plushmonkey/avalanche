@@ -1,7 +1,7 @@
 #include "Avalanche.h"
+#include "Factory.h"
 #include "login/LoginFlood.h"
 #include "login/LoginSequential.h"
-#include "attack/AttackRegistry.h"
 #include "attack/AttackInteract.h"
 #include "attack/AttackBookEdit.h"
 #include "attack/AttackCreativeWorldLag.h"
@@ -12,10 +12,17 @@
 
 namespace avalanche {
 
-static const AttackRegistry attackRegistry = AttackRegistry::MethodRegistry {
-    { "interact", [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackInteract>(client); } },
-    { "bookedit", [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackBookEdit>(client); } },
-    { "creative-world-lag", [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackCreativeWorldLag>(client); } },
+using AttackFactory = Factory<AttackMethod, mc::core::Client*>;
+static const AttackFactory attackFactory = AttackFactory::MethodRegistry {
+    { AttackInteract::s_Name, [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackInteract>(client); } },
+    { AttackBookEdit::s_Name, [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackBookEdit>(client); } },
+    { AttackCreativeWorldLag::s_Name, [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackCreativeWorldLag>(client); } },
+};
+
+using LoginFactory = Factory<LoginMethod>;
+static const LoginFactory loginFactory = LoginFactory::MethodRegistry {
+    { LoginFlood::s_Name, []() -> std::unique_ptr<LoginMethod> { return std::make_unique<LoginFlood>(); } },
+    { LoginSequential::s_Name, []() -> std::unique_ptr<LoginMethod> { return std::make_unique<LoginSequential>(); } },
 };
 
 void Avalanche::Run() {
@@ -78,18 +85,14 @@ bool Avalanche::Initialize(const OptionMap& options) {
         auto&& loginNode = root["login"];
         if (loginNode.isObject()) {
             auto&& methodNode = loginNode["method"];
-            std::string methodName = "flood";
+            std::string methodName = LoginFlood::s_Name;
 
             if (methodNode.isObject()) {
                 if (methodNode["name"].isString())
                     methodName = methodNode["name"].asString();
             }
 
-            if (methodName == "flood") {
-                m_LoginMethod = std::make_unique<avalanche::LoginFlood>();
-            } else if (methodName == "sequential") {
-                m_LoginMethod = std::make_unique<avalanche::LoginSequential>();
-            }
+            m_LoginMethod = loginFactory.Create(methodName);
 
             if (m_LoginMethod)
                 m_LoginMethod->ReadJSON(loginNode);
@@ -106,8 +109,9 @@ bool Avalanche::Initialize(const OptionMap& options) {
         }
     }
 
-    if (m_LoginMethod == nullptr)
-        m_LoginMethod = std::make_unique<avalanche::LoginFlood>();
+    if (m_LoginMethod == nullptr) {
+        m_LoginMethod = loginFactory.Create(LoginFlood::s_Name);
+    }
 
     if (!m_LoginMethod->ReadOptions(options)) {
         return false;
@@ -119,13 +123,16 @@ bool Avalanche::Initialize(const OptionMap& options) {
 
     m_Instances = std::vector<Instance>(count);
 
-    if (attackRegistry.IsValidAttack(attack))
+    if (attackFactory.Contains(attack))
         std::cout << "attack: " << attack << std::endl;
+    else
+        std::cout << "attack: none" << std::endl;
 
     for (auto&& instance : m_Instances) {
         instance.GetClient()->GetConnection()->GetSettings().SetLocale(L"en_GB");
+
         if (!attack.empty()) {
-            std::unique_ptr<AttackMethod> attackMethod = attackRegistry.CreateAttack(attack, instance.GetClient());
+            std::unique_ptr<AttackMethod> attackMethod = attackFactory.Create(attack, instance.GetClient());
 
             if (attackMethod && !attackNode.isNull()) {
                 attackMethod->ReadJSON(attackNode);

@@ -4,6 +4,8 @@
 
 namespace avalanche {
 
+const char* AttackInteract::s_Name = "interact";
+
 AttackInteract::AttackInteract(mc::core::Client* client)
     : m_Client(client),
     m_SendPerTick(100)
@@ -53,7 +55,7 @@ void AttackInteract::OnTick()  {
 
 bool AttackInteract::ReadJSON(const Json::Value& attackNode) {
     auto&& methodNode = attackNode["method"];
-    if (!methodNode.isString() || methodNode.asString() != "interact")
+    if (!methodNode.isString() || methodNode.asString() != s_Name)
         return false;
 
     auto&& sendPerTickNode = attackNode["send-per-tick"];

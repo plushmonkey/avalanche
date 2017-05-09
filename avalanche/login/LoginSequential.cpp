@@ -8,6 +8,8 @@
 
 namespace avalanche {
 
+const char* LoginSequential::s_Name = "sequential";
+
 struct login_guard : public mc::core::ConnectionListener {
     mc::core::Connection* connection;
     bool waiting;
