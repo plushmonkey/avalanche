@@ -8,12 +8,22 @@ const char* AttackInteract::s_Name = "interact";
 
 AttackInteract::AttackInteract(mc::core::Client* client)
     : m_Client(client),
-    m_SendPerTick(100)
+      m_SendPerTick(100),
+      m_Finished(false)
 {
-    client->RegisterListener(this);
+    
 }
 
 AttackInteract::~AttackInteract() {
+    
+}
+
+void AttackInteract::OnCreate() {
+    m_Client->RegisterListener(this);
+    m_Finished = false;
+}
+
+void AttackInteract::OnDestroy() {
     m_Client->UnregisterListener(this);
 }
 
@@ -51,6 +61,8 @@ void AttackInteract::OnTick()  {
 
         m_Client->GetConnection()->SendPacket(&packet);
     }
+
+    m_Finished = true;
 }
 
 bool AttackInteract::ReadJSON(const Json::Value& attackNode) {

@@ -84,9 +84,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="attack\AttackBookEdit.cpp" />
-    <ClCompile Include="attack\AttackInteract.cpp" />
-    <ClCompile Include="attack\AttackCreativeWorldLag.cpp" />
+    <ClCompile Include="behavior\attack\AttackBookEdit.cpp" />
+    <ClCompile Include="behavior\attack\AttackInteract.cpp" />
+    <ClCompile Include="behavior\attack\AttackCreativeWorldLag.cpp" />
+    <ClCompile Include="behavior\Behavior.cpp" />
+    <ClCompile Include="behavior\BehaviorDelay.cpp" />
+    <ClCompile Include="behavior\BehaviorMessage.cpp" />
+    <ClCompile Include="behavior\BehaviorSequence.cpp" />
     <ClCompile Include="getopt.cpp" />
     <ClCompile Include="getopt_long.cpp" />
     <ClCompile Include="Avalanche.cpp" />
@@ -102,10 +106,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="attack\AttackBookEdit.h" />
-    <ClInclude Include="attack\AttackInteract.h" />
-    <ClInclude Include="attack\AttackMethod.h" />
-    <ClInclude Include="attack\AttackCreativeWorldLag.h" />
+    <ClInclude Include="behavior\attack\AttackBookEdit.h" />
+    <ClInclude Include="behavior\attack\AttackInteract.h" />
+    <ClInclude Include="behavior\Behavior.h" />
+    <ClInclude Include="behavior\attack\AttackCreativeWorldLag.h" />
+    <ClInclude Include="behavior\BehaviorDelay.h" />
+    <ClInclude Include="behavior\BehaviorMessage.h" />
+    <ClInclude Include="behavior\BehaviorSequence.h" />
     <ClInclude Include="getopt.h" />
     <ClInclude Include="Instance.h" />
     <ClInclude Include="Avalanche.h" />

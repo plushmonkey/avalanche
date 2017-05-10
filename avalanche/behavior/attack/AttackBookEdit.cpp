@@ -10,12 +10,22 @@ s32 AttackBookEdit::s_SendPerTick = 1;
 std::string AttackBookEdit::s_AttackData;
 
 AttackBookEdit::AttackBookEdit(mc::core::Client* client)
-    : m_Client(client)
+    : m_Client(client),
+      m_Finished(false)
 {
-    client->RegisterListener(this);
+    
 }
 
 AttackBookEdit::~AttackBookEdit() {
+    
+}
+
+void AttackBookEdit::OnCreate() {
+    m_Client->RegisterListener(this);
+    m_Finished = false;
+}
+
+void AttackBookEdit::OnDestroy() {
     m_Client->UnregisterListener(this);
 }
 
@@ -61,6 +71,8 @@ void AttackBookEdit::OnTick() {
         mc::protocol::packets::out::PluginMessagePacket packet(L"MC|BEdit", s_AttackData);
         m_Client->GetConnection()->SendPacket(&packet);
     }
+
+    m_Finished = true;
 }
 
 bool AttackBookEdit::ReadJSON(const Json::Value& attackNode) {

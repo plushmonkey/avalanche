@@ -13,14 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\attack">
-      <UniqueIdentifier>{a73ad26a-d49d-4743-b367-22afad608dcc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\login">
       <UniqueIdentifier>{f2a74322-e827-4f09-b6d1-989e2d855204}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\attack">
-      <UniqueIdentifier>{4095a4f6-2254-45ae-8af4-3b89bd11b427}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\login">
       <UniqueIdentifier>{a20b7c69-3c6a-41ee-8bd3-44c809af4c68}</UniqueIdentifier>
@@ -30,6 +24,18 @@
     </Filter>
     <Filter Include="Source Files\login\generator">
       <UniqueIdentifier>{44c581d9-c490-4856-8bb7-920f3b3e879d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\behavior">
+      <UniqueIdentifier>{de528580-813c-46b1-aea6-2022d334e806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\behavior\attack">
+      <UniqueIdentifier>{a73ad26a-d49d-4743-b367-22afad608dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\behavior">
+      <UniqueIdentifier>{97316349-9e10-4566-8612-ba2f2c78b066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\behavior\attack">
+      <UniqueIdentifier>{4095a4f6-2254-45ae-8af4-3b89bd11b427}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,12 +54,6 @@
     <ClCompile Include="Instance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="attack\AttackBookEdit.cpp">
-      <Filter>Source Files\attack</Filter>
-    </ClCompile>
-    <ClCompile Include="attack\AttackInteract.cpp">
-      <Filter>Source Files\attack</Filter>
-    </ClCompile>
     <ClCompile Include="login\LoginFlood.cpp">
       <Filter>Source Files\login</Filter>
     </ClCompile>
@@ -62,9 +62,6 @@
     </ClCompile>
     <ClCompile Include="login\LoginSequential.cpp">
       <Filter>Source Files\login</Filter>
-    </ClCompile>
-    <ClCompile Include="attack\AttackCreativeWorldLag.cpp">
-      <Filter>Source Files\attack</Filter>
     </ClCompile>
     <ClCompile Include="login\generator\IncrementalGenerator.cpp">
       <Filter>Source Files\login\generator</Filter>
@@ -81,6 +78,27 @@
     <ClCompile Include="login\generator\MultiUserGenerator.cpp">
       <Filter>Source Files\login\generator</Filter>
     </ClCompile>
+    <ClCompile Include="behavior\attack\AttackBookEdit.cpp">
+      <Filter>Source Files\behavior\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\attack\AttackCreativeWorldLag.cpp">
+      <Filter>Source Files\behavior\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\attack\AttackInteract.cpp">
+      <Filter>Source Files\behavior\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\Behavior.cpp">
+      <Filter>Source Files\behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\BehaviorDelay.cpp">
+      <Filter>Source Files\behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\BehaviorMessage.cpp">
+      <Filter>Source Files\behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\BehaviorSequence.cpp">
+      <Filter>Source Files\behavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -91,15 +109,6 @@
     </ClInclude>
     <ClInclude Include="Avalanche.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="attack\AttackBookEdit.h">
-      <Filter>Header Files\attack</Filter>
-    </ClInclude>
-    <ClInclude Include="attack\AttackInteract.h">
-      <Filter>Header Files\attack</Filter>
-    </ClInclude>
-    <ClInclude Include="attack\AttackMethod.h">
-      <Filter>Header Files\attack</Filter>
     </ClInclude>
     <ClInclude Include="login\LoginFlood.h">
       <Filter>Header Files\login</Filter>
@@ -112,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="PositionProvider.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="attack\AttackCreativeWorldLag.h">
-      <Filter>Header Files\attack</Filter>
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>Header Files</Filter>
@@ -136,6 +142,27 @@
     </ClInclude>
     <ClInclude Include="login\Authenticator.h">
       <Filter>Header Files\login</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\attack\AttackBookEdit.h">
+      <Filter>Header Files\behavior\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\attack\AttackCreativeWorldLag.h">
+      <Filter>Header Files\behavior\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\attack\AttackInteract.h">
+      <Filter>Header Files\behavior\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\BehaviorDelay.h">
+      <Filter>Header Files\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\BehaviorMessage.h">
+      <Filter>Header Files\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\BehaviorSequence.h">
+      <Filter>Header Files\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\Behavior.h">
+      <Filter>Header Files\behavior</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

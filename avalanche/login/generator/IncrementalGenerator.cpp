@@ -42,7 +42,7 @@ bool IncrementalGenerator::ReadJSON(const Json::Value& node) {
         m_Password = passwordNode.asString();
 
     if (startNode.isInt())
-        m_Index = strtol(startNode.asString().c_str(), nullptr, 10);
+        m_Index = startNode.asInt();
 
     return true;
 }

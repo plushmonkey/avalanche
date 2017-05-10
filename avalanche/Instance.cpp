@@ -9,8 +9,8 @@ Instance::Instance()
 
 }
 
-void Instance::SetAttackMethod(std::unique_ptr<AttackMethod> attackMethod) {
-    m_AttackMethod = std::move(attackMethod);
+void Instance::SetBehavior(std::unique_ptr<Behavior> behavior) {
+    m_Behavior = std::move(behavior);
 }
 
 } // ns avalanche

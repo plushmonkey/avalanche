@@ -38,6 +38,9 @@ public:
     virtual std::size_t Login(std::vector<Instance>& instances) = 0;
 };
 
+using LoginFactory = Factory<LoginMethod>;
+extern LoginFactory g_LoginFactory;
+
 } // ns avalanche
 
 #endif

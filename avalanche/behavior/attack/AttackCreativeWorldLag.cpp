@@ -1,7 +1,6 @@
 #include "AttackCreativeWorldLag.h"
 
 #include <mclib/util/Utility.h>
-#include <iostream>
 #include <algorithm>
 
 namespace avalanche {
@@ -12,12 +11,21 @@ s32 AttackCreativeWorldLag::s_SendPerTick = 1;
 AttackCreativeWorldLag::AttackCreativeWorldLag(mc::core::Client* client)
     : m_Client(client),  
       m_PositionProvider(std::make_unique<IncrementalPositionProvider>(mc::Vector3i(0, 64, 0), 10, 10)),
-      m_SendGamemode(true)
+      m_Finished(false)
 {
-    client->RegisterListener(this);
+    
 }
 
 AttackCreativeWorldLag::~AttackCreativeWorldLag() {
+    
+}
+
+void AttackCreativeWorldLag::OnCreate() {
+    m_Client->RegisterListener(this);
+    m_Finished = false;
+}
+
+void AttackCreativeWorldLag::OnDestroy() {
     m_Client->UnregisterListener(this);
 }
 
@@ -47,19 +55,14 @@ void AttackCreativeWorldLag::OnTick() {
 
     using namespace mc::protocol::packets::out;
 
-    if (m_SendGamemode) {
-        m_SendGamemode = false;
-
-        ChatPacket packet("/gamemode 1");
-        m_Client->GetConnection()->SendPacket(&packet);
-    }
-
     for (s32 i = 0; i < s_SendPerTick; ++i) {
         auto attackSlot = CreateSlotAttack();
         CreativeInventoryActionPacket packet(36, attackSlot);
 
         m_Client->GetConnection()->SendPacket(&packet);
     }
+
+    m_Finished = true;
 }
 
 bool AttackCreativeWorldLag::ReadJSON(const Json::Value& attackNode) {
@@ -70,10 +73,6 @@ bool AttackCreativeWorldLag::ReadJSON(const Json::Value& attackNode) {
     auto&& sendPerTickNode = attackNode["send-per-tick"];
     if (!sendPerTickNode.isNull())
         s_SendPerTick = sendPerTickNode.asInt();
-
-    auto&& sendGamemodeNode = attackNode["send-gamemode"];
-    if (sendGamemodeNode.isBool())
-        m_SendGamemode = sendGamemodeNode.asBool();
 
     auto&& positionNode = attackNode["position"];
     if (positionNode.isObject()) {

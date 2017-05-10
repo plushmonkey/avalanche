@@ -1,29 +1,12 @@
 #include "Avalanche.h"
 #include "Factory.h"
 #include "login/LoginFlood.h"
-#include "login/LoginSequential.h"
-#include "attack/AttackInteract.h"
-#include "attack/AttackBookEdit.h"
-#include "attack/AttackCreativeWorldLag.h"
 
 #include <fstream>
 #include <memory>
 #include <iostream>
 
 namespace avalanche {
-
-using AttackFactory = Factory<AttackMethod, mc::core::Client*>;
-static const AttackFactory attackFactory = AttackFactory::MethodRegistry {
-    { AttackInteract::s_Name, [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackInteract>(client); } },
-    { AttackBookEdit::s_Name, [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackBookEdit>(client); } },
-    { AttackCreativeWorldLag::s_Name, [](mc::core::Client* client) -> std::unique_ptr<AttackMethod> { return std::make_unique<AttackCreativeWorldLag>(client); } },
-};
-
-using LoginFactory = Factory<LoginMethod>;
-static const LoginFactory loginFactory = LoginFactory::MethodRegistry {
-    { LoginFlood::s_Name, []() -> std::unique_ptr<LoginMethod> { return std::make_unique<LoginFlood>(); } },
-    { LoginSequential::s_Name, []() -> std::unique_ptr<LoginMethod> { return std::make_unique<LoginSequential>(); } },
-};
 
 void Avalanche::Run() {
     s32 activeInstances = m_LoginMethod->Login(m_Instances);
@@ -38,16 +21,24 @@ void Avalanche::Run() {
 
             if (!instanceStatus[i]) continue;
 
+            auto behavior = instance.GetBehavior();
+
             auto state = instance.GetClient()->GetConnection()->GetSocketState();
             if (state != mc::network::Socket::Status::Connected) {
                 instanceStatus[i] = false;
                 --activeInstances;
+                
+                if (behavior != nullptr)
+                    behavior->OnDestroy();
 
-                instance.SetAttackMethod(nullptr);
+                instance.SetBehavior(nullptr);
 
                 std::cout << "Instance was kicked from server. " << activeInstances << " instances remaining." << std::endl;
                 continue;
             }
+
+            if (behavior)
+                behavior->OnUpdate();
 
             instance.GetClient()->Update();
         }
@@ -56,13 +47,13 @@ void Avalanche::Run() {
 
 bool Avalanche::Initialize(const OptionMap& options) {
     auto jsonIter = options.find("json");
-    Json::Value attackNode;
-    std::string attack;
+    Json::Value behaviorNode;
+    std::string behaviorMethod;
     std::size_t count = 1;
 
-    auto attackIter = options.find("attack");
-    if (attackIter != options.end())
-        attack = attackIter->second;
+    auto behaviorIter = options.find("behavior");
+    if (behaviorIter != options.end())
+        behaviorMethod = behaviorIter->second;
 
     if (jsonIter != options.end()) {
         std::string jsonFile = jsonIter->second;
@@ -92,7 +83,7 @@ bool Avalanche::Initialize(const OptionMap& options) {
                     methodName = methodNode["name"].asString();
             }
 
-            m_LoginMethod = loginFactory.Create(methodName);
+            m_LoginMethod = g_LoginFactory.Create(methodName);
 
             if (m_LoginMethod) {
                 if (!m_LoginMethod->ReadJSON(loginNode)) {
@@ -102,19 +93,19 @@ bool Avalanche::Initialize(const OptionMap& options) {
             }
         }
 
-        if (attack.empty()) {
-            attackNode = root["attack"];
-            if (attackNode.isObject()) {
-                auto&& methodNode = attackNode["method"];
+        if (behaviorMethod.empty()) {
+            behaviorNode = root["behavior"];
+            if (behaviorNode.isObject()) {
+                auto&& methodNode = behaviorNode["method"];
                 if (methodNode.isString()) {
-                    attack = methodNode.asString();
+                    behaviorMethod = methodNode.asString();
                 }
             }
         }
     }
 
     if (m_LoginMethod == nullptr) {
-        m_LoginMethod = loginFactory.Create(LoginFlood::s_Name);
+        m_LoginMethod = g_LoginFactory.Create(LoginFlood::s_Name);
     }
 
     if (!m_LoginMethod->ReadOptions(options)) {
@@ -127,22 +118,25 @@ bool Avalanche::Initialize(const OptionMap& options) {
 
     m_Instances = std::vector<Instance>(count);
 
-    if (attackFactory.Contains(attack))
-        std::cout << "attack: " << attack << std::endl;
+    if (g_BehaviorFactory.Contains(behaviorMethod))
+        std::cout << "behavior: " << behaviorMethod << std::endl;
     else
-        std::cout << "attack: none" << std::endl;
+        std::cout << "behavior: none" << std::endl;
 
     for (auto&& instance : m_Instances) {
         instance.GetClient()->GetConnection()->GetSettings().SetLocale(L"en_GB");
 
-        if (!attack.empty()) {
-            std::unique_ptr<AttackMethod> attackMethod = attackFactory.Create(attack, instance.GetClient());
+        if (!behaviorMethod.empty()) {
+            std::unique_ptr<Behavior> behavior = g_BehaviorFactory.Create(behaviorMethod, instance.GetClient());
 
-            if (attackMethod && !attackNode.isNull()) {
-                attackMethod->ReadJSON(attackNode);
+            if (behavior && !behaviorNode.isNull()) {
+                behavior->ReadJSON(behaviorNode);
             }
 
-            instance.SetAttackMethod(std::move(attackMethod));
+            if (behavior)
+                behavior->OnCreate();
+
+            instance.SetBehavior(std::move(behavior));
         }
     }
 

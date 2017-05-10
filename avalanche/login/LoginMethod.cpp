@@ -4,11 +4,18 @@
 #include "generator/RandomGenerator.h"
 #include "generator/MultiUserGenerator.h"
 #include "generator/MultiTokenGenerator.h"
+#include "LoginFlood.h"
+#include "LoginSequential.h"
 #include "../Factory.h"
 #include <json/json.h>
 #include <iostream>
 
 namespace avalanche {
+
+LoginFactory g_LoginFactory = LoginFactory::MethodRegistry{
+    { LoginFlood::s_Name, []() -> std::unique_ptr<LoginMethod> { return std::make_unique<LoginFlood>(); } },
+    { LoginSequential::s_Name, []() -> std::unique_ptr<LoginMethod> { return std::make_unique<LoginSequential>(); } },
+};
 
 using GeneratorFactory = Factory<AuthGenerator>;
 static const GeneratorFactory generatorFactory = GeneratorFactory::MethodRegistry {
