@@ -45,8 +45,9 @@ avalanche::OptionMap ReadOptions(int argc, char* argv[]) {
             { "password", required_argument, 0, 0 },
             { "server", required_argument, 0, 0 },
             { "count", required_argument, 0, 0 },
-            { "attack", required_argument, 0, 0 },
+            { "behavior", required_argument, 0, 0 },
             { "json", required_argument, 0, 0 },
+            { 0, 0, 0, 0 }
         };
 
         int option_index = 0;
