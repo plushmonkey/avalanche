@@ -6,24 +6,58 @@ Set `connection-throttle: 0` in `bukkit.yml` when using the multiple instances.
 A delay can be added to the login sequence if needed.  
 This setting doesn't need to be changed when using `127.0.0.1` to log in. 
 
-## Attacks  
+## Behaviors  
+### delay  
+Pauses the current instance for some time. This is used for adding a delay in a sequence.  
+Configuration:  
+- `delay`: The number of milliseconds to pause for.  
+
+### message  
+Sends a message. This can be used to send commands.  
+Configuration:
+- `message`: The message to send to the server.  
+
+### sequence  
+This is a composite behavior for executing behaviors sequentially.  
+Behaviors that are part of the sequence will only be executed once unless repeat is true.  
+Configuration:
+- `repeat`: Whether or not the sequence should repeat itself once it finishes.  
+- `children`: An array of behaviors that the sequence should execute.  
+
 ### interact
 This will spam the server with block dig packets. This can cause massive lag with WorldEdit permission checks.  
 Countering the attack is as easy as putting in a packet limiting plugin, such as NoCheatPlus.  
+Configuration:  
+- `send-per-tick`: How many dig packets should be sent each tick.  
 
 ### bookedit
 This sends book data with many pages to the MC|BEdit plugin channel.  
 The pages aren't valid JSON, so each page that the server tries to deserialize will throw an exception.  
+The deserialization attack only works on Bukkit/Spigot derivative servers.  
 One instance is enough to freeze a server up by sending 10000 page book every tick.  
 With enough of these placed in a Shulker Box, the player holding it won't be able to login.  
 This is all possible in Survival mode.  
+Configuration:  
+- `send-per-tick`: How many books should be sent each tick.  
+- `pages`: How many pages each book should have. The server will kick the instance if this is too high.  
 
 ### creative-world-lag  
-This method requires creative mode.  
+This behavior requires creative mode. This can be put in a sequence after a message behavior that sends gamemode to the server.  
   
-This attack method uses CreativeInventoryActionPacket to create an item with block entity data in its inventory.  
+This behavior uses CreativeInventoryActionPacket to create an item with block entity data in its inventory.  
 The server will read the xyz of the item and try to load the block entity in the world at that position.  
 There's no range limit on this, so the server can be forced to load/generate chunks that are far away.  
+Configuration:
+- `send-per-tick`: How many packets are sent each tick.
+- `position`:
+  - `method`: Which method should be used to select the position. `random` or `increment`.  
+  - `initial`: This is only used for `increment` method. 
+    - `x`: The starting x position.
+    - `y`: The starting y position.
+    - `z`: The starting z position.
+  - `increment`: This is only used for `increment` method.
+    - `x`: How much x should change each packet.
+    - `z`: How much z should change each packet.  
 
 ## Authentication Generators  
 ### increment
@@ -62,92 +96,11 @@ Spawns in a single instance that does nothing.
 Spawns in 19 instances that do nothing.  
 
 ```
-./avalanche --username bot --password pw --server 127.0.0.1 --count 19 --attack interact
+./avalanche --username bot --password pw --server 127.0.0.1 --count 19 --behavior interact
 ```
-Spawns in 19 instances that will do the interact attack.
+Spawns in 19 instances that will use the interact behavior.
 
 ```
 ./avalanche --json basic.json
 ```
 Reads the config from basic.json file.
-
-### JSON Examples  
-```
-{
-  "login": {
-    "generator": {
-      "method": "increment",
-      "username": "user",
-      "password": "pw",
-      "start": 0
-    },
-    "server": "127.0.0.1",
-    "method": {
-      "name": "flood",
-      "delay": 0
-    }
-  },
-  "count": 5,
-  "attack": {
-    "method": "bookedit",
-    "send-per-tick": 1,
-    "pages": 10000
-  }
-}
-```
-
-```
-{
-  "login": {
-    "generator": {
-      "method": "random",
-      "min": 3,
-      "max": 16
-    },
-    "server": "127.0.0.1",
-    "method": {
-      "name": "sequential",
-      "delay": 5000
-    }
-  },
-  "count": 5,
-  "attack": {
-    "method": "creative-world-lag",
-    "send-per-tick": 30,
-    "send-gamemode": true,
-    "position": {
-      "method": "random",
-      "initial": {
-        "x": 0,
-        "y": 64,
-        "z": 0
-      },
-      "increment": {
-        "x": 10,
-        "z": 10
-      }
-    }
-  }
-}
-```
-
-```
-{
-  "login": {
-    "generator": {
-      "method": "multi-user",
-      "filename": "users.txt"
-    },
-    "server": "127.0.0.1",
-    "method": {
-      "name": "sequential",
-      "delay": 0
-    }
-  },
-  "count": 3,
-  "attack": {
-    "method": "interact",
-    "send-per-tick": 75
-  }
-}
-```
