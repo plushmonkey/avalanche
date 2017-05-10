@@ -1,6 +1,7 @@
 #include "BehaviorMessage.h"
 
 #include <json/json.h>
+#include <mclib/util/Utility.h>
 
 namespace avalanche {
 
@@ -27,6 +28,8 @@ void BehaviorMessage::OnDestroy() {
 
 void BehaviorMessage::OnTick() {
     if (m_Finished) return;
+    if (!m_Client->GetWorld()->GetChunk(mc::ToVector3i(m_Client->GetPlayerController()->GetPosition())))
+        return;
 
     mc::protocol::packets::out::ChatPacket packet(m_Message);
     m_Client->GetConnection()->SendPacket(&packet);
