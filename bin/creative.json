@@ -1,0 +1,37 @@
+{
+  "login": {
+    "generator": {
+      "method": "multi-user",
+      "filename": "users.txt"
+    },
+    "server": "127.0.0.1",
+    "method": {
+      "name": "sequential",
+      "delay": 5000
+    }
+  },
+  "count": 3,
+  "behavior": {
+    "method": "sequence",
+    "repeat": false,
+    "children": [
+      {
+        "method": "message",
+        "message": "/gamemode 1"
+      },
+      {
+        "method": "sequence",
+        "repeat": true,
+        "children": [
+          {
+            "method": "creative-world-lag",
+            "send-per-tick": 30,
+            "position": {
+              "method": "random"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

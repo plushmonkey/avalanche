@@ -1,0 +1,20 @@
+{
+  "login": {
+    "generator": {
+      "method": "increment",
+      "username": "user",
+      "password": "pw",
+      "start": 0
+    },
+    "server": "127.0.0.1",
+    "method": {
+      "name": "flood",
+      "delay": 0
+    }
+  },
+  "count": 20,
+  "behavior": {
+    "method": "interact",
+    "send-per-tick": 75
+  }
+}

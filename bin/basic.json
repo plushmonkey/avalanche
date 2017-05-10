@@ -1,0 +1,15 @@
+{
+  "login": {
+    "generator": {
+      "method": "increment",
+      "username": "user",
+      "password": "pw"
+    },
+    "server": "127.0.0.1",
+    "method": {
+      "name": "sequential",
+      "delay": 500
+    }
+  },
+  "count": 1
+}

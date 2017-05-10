@@ -52,6 +52,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>..\lib\mclib\lib\jsoncpp\include;..\lib\mclib\mclib\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>..\lib\mclib\lib\jsoncpp\lib;..\lib\mclib\Release;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
