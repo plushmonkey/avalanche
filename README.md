@@ -6,6 +6,18 @@ Set `connection-throttle: 0` in `bukkit.yml` when using the multiple instances.
 A delay can be added to the login sequence if needed.  
 This setting doesn't need to be changed when using `127.0.0.1` to log in. 
 
+## Building
+### Ubuntu  
+`git submodule update`  
+Install the [dependencies](https://github.com/plushmonkey/mclib/blob/master/README.md#building) for mclib.  
+`make`
+
+### Windows
+`git submodule update`  
+Unzip `lib.zip` in the mclib directory.  
+Build mclib.  
+Open `avalanche.sln` with Visual Studio 2017 and build.
+
 ## Behaviors  
 ### delay  
 Pauses the current instance for some time. This is used for adding a delay in a sequence.  
