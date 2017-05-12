@@ -6,4 +6,8 @@ Release
 *.so
 *.o
 .vs
-
+*.exe
+*.dll
+*.iobj
+*.ipdb
+*.pdb

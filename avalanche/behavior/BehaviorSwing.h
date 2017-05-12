@@ -1,5 +1,5 @@
-#ifndef _AVALANCHE_BEHAVIOR_SEQUENCE_
-#define _AVALANCHE_BEHAVIOR_SEQUENCE_
+#ifndef _AVALANCHE_BEHAVIOR_SWING_H_
+#define _AVALANCHE_BEHAVIOR_SWING_H_
 
 #include "Behavior.h"
 
@@ -9,20 +9,21 @@
 
 namespace avalanche {
 
-class BehaviorSequence : public Behavior {
+class BehaviorSwing : public Behavior, mc::core::ClientListener {
 private:
     mc::core::Client* m_Client;
-    std::vector<std::unique_ptr<Behavior>> m_Children;
-    s32 m_Index;
-    bool m_Repeat;
+    mc::Hand m_Hand;
+    bool m_Attack;
     bool m_Finished;
 
 public:
-    BehaviorSequence(mc::core::Client* client);
+    BehaviorSwing(mc::core::Client* client);
 
     void OnCreate() override;
     bool OnUpdate() override;
     void OnDestroy() override;
+
+    void OnTick() override;
 
     bool ReadJSON(const Json::Value& attackNode) override;
 

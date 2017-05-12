@@ -99,6 +99,12 @@
     <ClCompile Include="behavior\BehaviorSequence.cpp">
       <Filter>Source Files\behavior</Filter>
     </ClCompile>
+    <ClCompile Include="behavior\BehaviorSneak.cpp">
+      <Filter>Source Files\behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\BehaviorSwing.cpp">
+      <Filter>Source Files\behavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -162,6 +168,12 @@
       <Filter>Header Files\behavior</Filter>
     </ClInclude>
     <ClInclude Include="behavior\Behavior.h">
+      <Filter>Header Files\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\BehaviorSwing.h">
+      <Filter>Header Files\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\BehaviorSneak.h">
       <Filter>Header Files\behavior</Filter>
     </ClInclude>
   </ItemGroup>

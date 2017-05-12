@@ -1,0 +1,39 @@
+{
+  "login": {
+    "generator": {
+      "method": "increment",
+      "username": "user",
+      "password": "pw"
+    },
+    "server": "127.0.0.1",
+    "method": {
+      "name": "sequential",
+      "delay": 500
+    }
+  },
+  "count": 1,
+  "behavior": {
+    "method": "sequence",
+    "repeat": true,
+    "children": [
+      {
+        "method": "sneak",
+        "start": true,
+        "stop": false
+      },
+      {
+        "method": "delay",
+        "delay": 2000
+      },
+      {
+        "method": "sneak",
+        "start": false,
+        "stop": true
+      },
+      {
+        "method": "delay",
+        "delay": 2000
+      }
+    ]
+  }
+}

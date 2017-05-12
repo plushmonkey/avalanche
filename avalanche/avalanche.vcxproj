@@ -92,6 +92,8 @@
     <ClCompile Include="behavior\BehaviorDelay.cpp" />
     <ClCompile Include="behavior\BehaviorMessage.cpp" />
     <ClCompile Include="behavior\BehaviorSequence.cpp" />
+    <ClCompile Include="behavior\BehaviorSneak.cpp" />
+    <ClCompile Include="behavior\BehaviorSwing.cpp" />
     <ClCompile Include="getopt.cpp" />
     <ClCompile Include="getopt_long.cpp" />
     <ClCompile Include="Avalanche.cpp" />
@@ -114,6 +116,8 @@
     <ClInclude Include="behavior\BehaviorDelay.h" />
     <ClInclude Include="behavior\BehaviorMessage.h" />
     <ClInclude Include="behavior\BehaviorSequence.h" />
+    <ClInclude Include="behavior\BehaviorSneak.h" />
+    <ClInclude Include="behavior\BehaviorSwing.h" />
     <ClInclude Include="getopt.h" />
     <ClInclude Include="Instance.h" />
     <ClInclude Include="Avalanche.h" />

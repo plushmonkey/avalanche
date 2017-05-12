@@ -22,7 +22,7 @@ public:
     bool OnUpdate() override;
     void OnDestroy() override;
 
-    bool ReadJSON(const Json::Value& attackNode);
+    bool ReadJSON(const Json::Value& attackNode) override;
 
     static const char* s_Name;
 };
