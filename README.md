@@ -29,6 +29,18 @@ Sends a message. This can be used to send commands.
 Configuration:
 - `message`: The message to send to the server.  
 
+### sneak
+Start or stop sneaking.  
+Configuration:  
+- `start`: Boolean indicating whether or not the instance should start sneaking.
+- `stop`: Boolean indicating whether or not the instance should stop sneaking.
+
+### swing
+Swing either main hand or off hand.  
+Configuration:  
+- `attack`: The instance will ray cast to find an entity to attack if this is true.
+- `hand`: Set to `"off"` to swing with off hand.
+
 ### sequence  
 This is a composite behavior for executing behaviors sequentially.  
 Behaviors that are part of the sequence will only be executed once unless repeat is true.  
