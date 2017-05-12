@@ -84,7 +84,7 @@ void BehaviorSwing::OnTick() {
             }
         }
 
-        if (closestDist <= 5.0) {
+        if (closestDist <= 4.0) {
             out::UseEntityPacket attackPacket(closest->GetEntityId(), out::UseEntityPacket::Action::Attack);
 
             m_Client->GetConnection()->SendPacket(&attackPacket);
