@@ -5,6 +5,9 @@
 #include <mclib/common/Vector.h>
 #include <random>
 
+#undef min
+#undef max
+
 namespace avalanche {
 
 class PositionProvider {

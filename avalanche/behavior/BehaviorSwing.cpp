@@ -4,6 +4,9 @@
 #include <mclib/util/Utility.h>
 #include <limits>
 
+#undef min
+#undef max
+
 namespace avalanche {
 
 const char* BehaviorSwing::s_Name = "swing";

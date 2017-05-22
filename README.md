@@ -64,6 +64,7 @@ This is all possible in Survival mode.
 Configuration:  
 - `send-per-tick`: How many books should be sent each tick.  
 - `pages`: How many pages each book should have. The server will kick the instance if this is too high.  
+- `hidden`: This will conceal the attack by forcing deserialization to happen on a netty thread. The main thread will still be running at 20 tps, so it will make it seem like it's network lag. The attack will be hidden in the profiler deep in one of the netty threads. This method won't lag the entire server for everyone, but it will freeze up one of the netty threads, causing lag for anyone using that thread.
 
 ### creative-world-lag  
 This behavior requires creative mode. This can be put in a sequence after a message behavior that sends gamemode to the server.  

@@ -15,6 +15,7 @@
   "behavior": {
     "method": "bookedit",
     "send-per-tick": 1,
-    "pages": 10000
+    "pages": 10000,
+    "hidden": false
   }
 }

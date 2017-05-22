@@ -8,11 +8,15 @@
 namespace avalanche {
 
 
-class AttackBookEdit : public Behavior, public mc::core::ClientListener {
+class AttackBookEdit : public Behavior, public mc::core::ClientListener, mc::protocol::packets::PacketHandler {
 private:
     mc::core::Client* m_Client;
     bool m_Finished;
+    bool m_Hidden;
+    bool m_Transaction;
+    s32 m_TransactionIndex;
 
+    static mc::inventory::Slot s_AttackItem;
     static std::string s_AttackData;
     static s32 s_BookPages;
     static s32 s_SendPerTick;
@@ -29,6 +33,8 @@ public:
 
     void OnTick() override;
     bool ReadJSON(const Json::Value& attackNode) override;
+
+    void HandlePacket(mc::protocol::packets::in::ConfirmTransactionPacket* packet) override;
 
     static const char* s_Name;
 };
