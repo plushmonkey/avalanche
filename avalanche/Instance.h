@@ -11,6 +11,7 @@ private:
     mc::protocol::packets::PacketDispatcher m_Dispatcher;
     mc::core::Client m_Client;
     std::unique_ptr<Behavior> m_Behavior;
+    bool m_Active;
 
 public:
     Instance();
@@ -19,6 +20,9 @@ public:
     void SetBehavior(std::unique_ptr<Behavior> behavior);
 
     mc::core::Client* GetClient() { return &m_Client; }
+
+    // Returns false if the instance is transitioning from active to inactive.
+    bool Update();
 };
 
 } // ns avalanche

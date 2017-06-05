@@ -11,36 +11,14 @@ namespace avalanche {
 void Avalanche::Run() {
     s32 activeInstances = m_LoginMethod->Login(m_Instances);
 
-    std::vector<bool> instanceStatus(activeInstances, true);
-
     std::cout << "Successfully logged in " << activeInstances << "/" << m_Instances.size() << " instances." << std::endl;
 
     while (activeInstances > 0) {
-        for (std::size_t i = 0; i < m_Instances.size(); ++i) {
-            auto&& instance = m_Instances[i];
-
-            if (!instanceStatus[i]) continue;
-
-            auto behavior = instance.GetBehavior();
-
-            auto state = instance.GetClient()->GetConnection()->GetSocketState();
-            if (state != mc::network::Socket::Status::Connected) {
-                instanceStatus[i] = false;
+        for (auto&& instance : m_Instances) {
+            if (!instance.Update()) {
                 --activeInstances;
-                
-                if (behavior != nullptr)
-                    behavior->OnDestroy();
-
-                instance.SetBehavior(nullptr);
-
                 std::cout << "Instance was kicked from server. " << activeInstances << " instances remaining." << std::endl;
-                continue;
             }
-
-            if (behavior)
-                behavior->OnUpdate();
-
-            instance.GetClient()->Update();
         }
     }
 }
