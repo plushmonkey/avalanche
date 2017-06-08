@@ -2,9 +2,10 @@
 
 namespace avalanche {
 
-Instance::Instance()
+Instance::Instance(mc::protocol::Version version)
     : m_Dispatcher(),
-      m_Client(&m_Dispatcher, mc::protocol::Version::Minecraft_1_11_2),
+      m_Client(&m_Dispatcher, version),
+      m_Version(version),
       m_Active(true)
 {
 

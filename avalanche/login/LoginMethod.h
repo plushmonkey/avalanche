@@ -32,10 +32,13 @@ public:
     LoginMethod();
     virtual ~LoginMethod() { }
 
+    const std::string& GetHost() const { return m_Host; }
+    u16 GetPort() const { return m_Port; }
+
     bool ReadOptions(std::unordered_map<std::string, std::string> options);
     bool ReadJSON(const Json::Value& node);
 
-    virtual std::size_t Login(std::vector<Instance>& instances) = 0;
+    virtual std::size_t Login(std::vector<std::unique_ptr<Instance>>& instances) = 0;
 };
 
 using LoginFactory = Factory<LoginMethod>;

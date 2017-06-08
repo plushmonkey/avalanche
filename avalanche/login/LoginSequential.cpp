@@ -40,7 +40,7 @@ LoginSequential::LoginSequential()
     
 }
 
-std::size_t LoginSequential::Login(std::vector<Instance>& instances) {
+std::size_t LoginSequential::Login(std::vector<std::unique_ptr<Instance>>& instances) {
     std::size_t total = 0;
 
     for (std::size_t i = 0; i < instances.size(); ++i) {
@@ -49,10 +49,10 @@ std::size_t LoginSequential::Login(std::vector<Instance>& instances) {
             // Update previous instances while waiting to log in the next one.
             while (mc::util::GetTime() < time + m_Delay) {
                 for (std::size_t j = 0; j < i; ++j) {
-                    auto connState = instances[j].GetClient()->GetConnection()->GetSocketState();
+                    auto connState = instances[j]->GetClient()->GetConnection()->GetSocketState();
 
                     if (connState == mc::network::Socket::Status::Connected)
-                        instances[j].GetClient()->Update();
+                        instances[j]->GetClient()->Update();
                 }
             }
         }
@@ -61,7 +61,7 @@ std::size_t LoginSequential::Login(std::vector<Instance>& instances) {
             Authenticator authenticator = m_Generator->Generate();
             std::cout << "Trying to log in to " << m_Host << ":" << m_Port << " with " << authenticator.GetUsername() << std::endl;
 
-            if (!authenticator.Authenticate(instances[i], m_Host, m_Port)) {
+            if (!authenticator.Authenticate(*instances[i], m_Host, m_Port)) {
                 std::cerr << "Failed to login with instance " << i << std::endl;
                 continue;
             }
@@ -70,13 +70,13 @@ std::size_t LoginSequential::Login(std::vector<Instance>& instances) {
             continue;
         }
 
-        login_guard guard(instances[i].GetClient()->GetConnection());
+        login_guard guard(instances[i]->GetClient()->GetConnection());
 
         while (guard.waiting) {
-            auto connState = instances[i].GetClient()->GetConnection()->GetSocketState();
+            auto connState = instances[i]->GetClient()->GetConnection()->GetSocketState();
 
             if (connState == mc::network::Socket::Status::Connected)
-                instances[i].GetClient()->Update();
+                instances[i]->GetClient()->Update();
         }
 
         if (guard.result) {

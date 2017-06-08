@@ -11,10 +11,11 @@ private:
     mc::protocol::packets::PacketDispatcher m_Dispatcher;
     mc::core::Client m_Client;
     std::unique_ptr<Behavior> m_Behavior;
+    mc::protocol::Version m_Version;
     bool m_Active;
 
 public:
-    Instance();
+    Instance(mc::protocol::Version version);
 
     Behavior* GetBehavior() { return m_Behavior.get(); }
     void SetBehavior(std::unique_ptr<Behavior> behavior);

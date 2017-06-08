@@ -107,6 +107,7 @@
     <ClCompile Include="login\LoginMethod.cpp" />
     <ClCompile Include="login\LoginSequential.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="VersionDetector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="behavior\attack\AttackBookEdit.h" />
@@ -132,6 +133,7 @@
     <ClInclude Include="login\LoginSequential.h" />
     <ClInclude Include="PositionProvider.h" />
     <ClInclude Include="Factory.h" />
+    <ClInclude Include="VersionDetector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

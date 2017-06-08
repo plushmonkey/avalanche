@@ -105,6 +105,9 @@
     <ClCompile Include="behavior\BehaviorSwing.cpp">
       <Filter>Source Files\behavior</Filter>
     </ClCompile>
+    <ClCompile Include="VersionDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="behavior\BehaviorSneak.h">
       <Filter>Header Files\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionDetector.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

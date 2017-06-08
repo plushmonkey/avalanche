@@ -1,6 +1,7 @@
 #include "Avalanche.h"
 #include "Factory.h"
 #include "login/LoginFlood.h"
+#include "VersionDetector.h"
 
 #include <fstream>
 #include <memory>
@@ -15,7 +16,7 @@ void Avalanche::Run() {
 
     while (activeInstances > 0) {
         for (auto&& instance : m_Instances) {
-            if (!instance.Update()) {
+            if (!instance->Update()) {
                 --activeInstances;
                 std::cout << "Instance was kicked from server. " << activeInstances << " instances remaining." << std::endl;
             }
@@ -94,7 +95,13 @@ bool Avalanche::Initialize(const OptionMap& options) {
     if (countIter != options.end())
         count = strtol(countIter->second.c_str(), nullptr, 10);
 
-    m_Instances = std::vector<Instance>(count);
+    VersionDetector versionDetector(m_LoginMethod->GetHost(), m_LoginMethod->GetPort());
+    auto version = versionDetector.GetVersion();
+
+    m_Instances.reserve(count);
+
+    for (std::size_t i = 0; i < count; ++i)
+        m_Instances.emplace_back(std::make_unique<Instance>(version));
 
     if (g_BehaviorFactory.Contains(behaviorMethod))
         std::cout << "behavior: " << behaviorMethod << std::endl;
@@ -102,10 +109,8 @@ bool Avalanche::Initialize(const OptionMap& options) {
         std::cout << "behavior: none" << std::endl;
 
     for (auto&& instance : m_Instances) {
-        instance.GetClient()->GetConnection()->GetSettings().SetLocale(L"en_GB");
-
         if (!behaviorMethod.empty()) {
-            std::unique_ptr<Behavior> behavior = g_BehaviorFactory.Create(behaviorMethod, instance.GetClient());
+            std::unique_ptr<Behavior> behavior = g_BehaviorFactory.Create(behaviorMethod, instance->GetClient());
 
             if (behavior && !behaviorNode.isNull()) {
                 behavior->ReadJSON(behaviorNode);
@@ -114,7 +119,7 @@ bool Avalanche::Initialize(const OptionMap& options) {
             if (behavior)
                 behavior->OnCreate();
 
-            instance.SetBehavior(std::move(behavior));
+            instance->SetBehavior(std::move(behavior));
         }
     }
 

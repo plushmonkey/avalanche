@@ -14,7 +14,7 @@ private:
 public:
     LoginSequential();
 
-    std::size_t Login(std::vector<Instance>& instances);
+    std::size_t Login(std::vector<std::unique_ptr<Instance>>& instances);
 
     static const char* s_Name;
 };

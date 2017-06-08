@@ -12,7 +12,7 @@ using OptionMap = std::unordered_map<std::string, std::string>;
 
 class Avalanche {
 private:
-    std::vector<Instance> m_Instances;
+    std::vector<std::unique_ptr<Instance>> m_Instances;
     std::unique_ptr<LoginMethod> m_LoginMethod;
 
 public:
