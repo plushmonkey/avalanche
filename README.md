@@ -57,7 +57,7 @@ Configuration:
 ### bookedit
 This sends book data with many pages to the MC|BEdit plugin channel.  
 The pages aren't valid JSON, so each page that the server tries to deserialize will throw an exception.  
-The deserialization attack only works on Bukkit/Spigot derivative servers.  
+The deserialization attack only works on Bukkit/Spigot derivative servers. This was fixed in Spigot 1.12.0, but the hidden attack still works.  
 One instance is enough to freeze a server up by sending 10000 page book every tick.  
 With enough of these placed in a Shulker Box, the player holding it won't be able to login.  
 This is all possible in Survival mode.  
@@ -65,6 +65,15 @@ Configuration:
 - `send-per-tick`: How many books should be sent each tick.  
 - `pages`: How many pages each book should have. The server will kick the instance if this is too high.  
 - `hidden`: This will conceal the attack by forcing deserialization to happen on a netty thread. The main thread will still be running at 20 tps, so it will make it seem like it's network lag. The attack will be hidden in the profiler deep in one of the netty threads. This method won't lag the entire server for everyone, but it will freeze up one of the netty threads, causing lag for anyone using that thread.
+
+### recipe
+This attack is similar to the bookedit hidden attack, but instead it uses the 1.12 PrepareCraftingGridPacket to send the books.  
+
+Configuration:  
+- `send-per-tick`: How many packets should be sent each tick.  
+- `pages`: How many pages each book should have. The server will kick the instance if this is too high.   
+- `return-count`: How many books are sent in the return entry array.  
+- `prepare-count`: How many books are sent in the prepare entry array.  
 
 ### creative-world-lag  
 This behavior requires creative mode. This can be put in a sequence after a message behavior that sends gamemode to the server.  
