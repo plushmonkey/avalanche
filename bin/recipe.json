@@ -11,11 +11,12 @@
       "delay": 0
     }
   },
-  "count": 5,
+  "count": 1,
   "behavior": {
-    "method": "bookedit",
+    "method": "recipe",
     "send-per-tick": 1,
     "pages": 10000,
-    "hidden": true
+    "return-count": 60,
+    "prepare-count": 1
   }
 }
