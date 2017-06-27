@@ -91,6 +91,7 @@
     <ClCompile Include="behavior\attack\AttackRecipe.cpp" />
     <ClCompile Include="behavior\Behavior.cpp" />
     <ClCompile Include="behavior\BehaviorDelay.cpp" />
+    <ClCompile Include="behavior\BehaviorDisconnect.cpp" />
     <ClCompile Include="behavior\BehaviorMessage.cpp" />
     <ClCompile Include="behavior\BehaviorSequence.cpp" />
     <ClCompile Include="behavior\BehaviorSneak.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="behavior\Behavior.h" />
     <ClInclude Include="behavior\attack\AttackCreativeWorldLag.h" />
     <ClInclude Include="behavior\BehaviorDelay.h" />
+    <ClInclude Include="behavior\BehaviorDisconnect.h" />
     <ClInclude Include="behavior\BehaviorMessage.h" />
     <ClInclude Include="behavior\BehaviorSequence.h" />
     <ClInclude Include="behavior\BehaviorSneak.h" />

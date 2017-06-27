@@ -29,6 +29,9 @@ Sends a message. This can be used to send commands.
 Configuration:
 - `message`: The message to send to the server.  
 
+### disconnect  
+Disconnects from the server immediately.  
+
 ### sneak
 Start or stop sneaking.  
 Configuration:  

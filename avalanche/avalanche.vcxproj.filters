@@ -111,6 +111,9 @@
     <ClCompile Include="behavior\attack\AttackRecipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="behavior\BehaviorDisconnect.cpp">
+      <Filter>Source Files\behavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getopt.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="behavior\attack\AttackRecipe.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\BehaviorDisconnect.h">
+      <Filter>Header Files\behavior</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

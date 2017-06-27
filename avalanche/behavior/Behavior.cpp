@@ -5,6 +5,7 @@
 #include "attack/AttackInteract.h"
 #include "attack/AttackRecipe.h"
 #include "BehaviorDelay.h"
+#include "BehaviorDisconnect.h"
 #include "BehaviorMessage.h"
 #include "BehaviorSequence.h"
 #include "BehaviorSneak.h"
@@ -14,6 +15,7 @@ namespace avalanche {
 
 BehaviorFactory g_BehaviorFactory = BehaviorFactory::MethodRegistry {
     { BehaviorDelay::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorDelay>(client); } },
+    { BehaviorDisconnect::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorDisconnect>(client); } },
     { BehaviorMessage::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorMessage>(client); } },
     { BehaviorSequence::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSequence>(client); } },
     { BehaviorSneak::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSneak>(client); } },

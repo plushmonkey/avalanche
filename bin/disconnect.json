@@ -1,0 +1,18 @@
+{
+  "login": {
+    "generator": {
+      "method": "increment",
+      "username": "user",
+      "password": "pw"
+    },
+    "server": "127.0.0.1",
+    "method": {
+      "name": "flood",
+      "delay": 0
+    }
+  },
+  "count": 20,
+  "behavior": {
+    "method": "disconnect"
+  }
+}
