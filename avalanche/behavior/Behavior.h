@@ -3,6 +3,8 @@
 
 #include "../Factory.h"
 
+#include <mclib/protocol/ProtocolState.h>
+
 namespace Json {
 
 class Value;
@@ -31,7 +33,7 @@ public:
     virtual bool ReadJSON(const Json::Value& node) = 0;
 };
 
-using BehaviorFactory = Factory<Behavior, mc::core::Client*>;
+using BehaviorFactory = Factory<Behavior, mc::core::Client*, mc::protocol::Version>;
 extern BehaviorFactory g_BehaviorFactory;
 
 } // ns avalanche

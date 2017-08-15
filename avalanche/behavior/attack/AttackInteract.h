@@ -14,7 +14,7 @@ private:
     bool m_Finished;
 
 public:
-    AttackInteract(mc::core::Client* client);
+    AttackInteract(mc::core::Client* client, mc::protocol::Version version);
     ~AttackInteract();
 
     void OnCreate() override;

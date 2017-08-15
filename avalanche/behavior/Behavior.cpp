@@ -14,17 +14,17 @@
 namespace avalanche {
 
 BehaviorFactory g_BehaviorFactory = BehaviorFactory::MethodRegistry {
-    { BehaviorDelay::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorDelay>(client); } },
-    { BehaviorDisconnect::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorDisconnect>(client); } },
-    { BehaviorMessage::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorMessage>(client); } },
-    { BehaviorSequence::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSequence>(client); } },
-    { BehaviorSneak::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSneak>(client); } },
-    { BehaviorSwing::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSwing>(client); } },
+    { BehaviorDelay::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorDelay>(client, version); } },
+    { BehaviorDisconnect::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorDisconnect>(client, version); } },
+    { BehaviorMessage::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorMessage>(client, version); } },
+    { BehaviorSequence::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSequence>(client, version); } },
+    { BehaviorSneak::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSneak>(client, version); } },
+    { BehaviorSwing::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<BehaviorSwing>(client, version); } },
 
-    { AttackRecipe::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<AttackRecipe>(client); } },
-    { AttackBookEdit::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<AttackBookEdit>(client); } },
-    { AttackCreativeWorldLag::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<AttackCreativeWorldLag>(client); } },
-    { AttackInteract::s_Name, [](mc::core::Client* client) -> std::unique_ptr<Behavior> { return std::make_unique<AttackInteract>(client); } },
+    { AttackRecipe::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<AttackRecipe>(client, version); } },
+    { AttackBookEdit::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<AttackBookEdit>(client, version); } },
+    { AttackCreativeWorldLag::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<AttackCreativeWorldLag>(client, version); } },
+    { AttackInteract::s_Name, [](mc::core::Client* client, mc::protocol::Version version) -> std::unique_ptr<Behavior> { return std::make_unique<AttackInteract>(client, version); } },
 };
 
 } // ns avalanche

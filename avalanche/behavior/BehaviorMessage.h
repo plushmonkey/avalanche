@@ -16,7 +16,7 @@ private:
     bool m_Finished;
 
 public:
-    BehaviorMessage(mc::core::Client* client);
+    BehaviorMessage(mc::core::Client* client, mc::protocol::Version version);
 
     void OnCreate() override;
     bool OnUpdate() override;

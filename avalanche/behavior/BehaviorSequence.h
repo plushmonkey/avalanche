@@ -12,13 +12,14 @@ namespace avalanche {
 class BehaviorSequence : public Behavior {
 private:
     mc::core::Client* m_Client;
+    mc::protocol::Version m_Version;
     std::vector<std::unique_ptr<Behavior>> m_Children;
     s32 m_Index;
     bool m_Repeat;
     bool m_Finished;
 
 public:
-    BehaviorSequence(mc::core::Client* client);
+    BehaviorSequence(mc::core::Client* client, mc::protocol::Version version);
 
     void OnCreate() override;
     bool OnUpdate() override;

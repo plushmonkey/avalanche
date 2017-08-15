@@ -10,7 +10,7 @@ s32 AttackBookEdit::s_SendPerTick = 1;
 std::string AttackBookEdit::s_AttackData;
 mc::inventory::Slot AttackBookEdit::s_AttackItem;
 
-AttackBookEdit::AttackBookEdit(mc::core::Client* client)
+AttackBookEdit::AttackBookEdit(mc::core::Client* client, mc::protocol::Version version)
     : mc::protocol::packets::PacketHandler(client->GetDispatcher()),
       m_Client(client),
       m_Finished(false),

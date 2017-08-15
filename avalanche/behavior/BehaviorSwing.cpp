@@ -19,7 +19,7 @@ mc::Vector3d OrientationToVector(double yaw, double pitch) {
     );
 }
 
-BehaviorSwing::BehaviorSwing(mc::core::Client* client)
+BehaviorSwing::BehaviorSwing(mc::core::Client* client, mc::protocol::Version version)
     : m_Client(client),
       m_Hand(mc::Hand::Main),
       m_Attack(false),

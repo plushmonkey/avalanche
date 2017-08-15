@@ -10,6 +10,9 @@
 namespace avalanche {
 
 void Avalanche::Run() {
+    if (m_Instances.empty())
+        return;
+
     s32 activeInstances = m_LoginMethod->Login(m_Instances);
 
     std::cout << "Successfully logged in " << activeInstances << "/" << m_Instances.size() << " instances." << std::endl;
@@ -110,10 +113,22 @@ bool Avalanche::Initialize(const OptionMap& options) {
 
     for (auto&& instance : m_Instances) {
         if (!behaviorMethod.empty()) {
-            std::unique_ptr<Behavior> behavior = g_BehaviorFactory.Create(behaviorMethod, instance->GetClient());
+            std::unique_ptr<Behavior> behavior = g_BehaviorFactory.Create(behaviorMethod, instance->GetClient(), version);
 
             if (behavior && !behaviorNode.isNull()) {
-                behavior->ReadJSON(behaviorNode);
+                try {
+                    if (!behavior->ReadJSON(behaviorNode)) {
+                        std::cerr << "Error reading behavior JSON" << std::endl;
+
+                        m_Instances.clear();
+                        return true;
+                    }
+                } catch (const std::exception& e) {
+                    std::cerr << "Behavior error: " << e.what() << std::endl;
+
+                    m_Instances.clear();
+                    return true;
+                }
             }
 
             if (behavior)

@@ -17,7 +17,7 @@ private:
     bool m_Finished;
 
 public:
-    BehaviorSneak(mc::core::Client* client);
+    BehaviorSneak(mc::core::Client* client, mc::protocol::Version version);
 
     void OnCreate() override;
     bool OnUpdate() override;

@@ -108,11 +108,11 @@
     <ClCompile Include="VersionDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="behavior\attack\AttackRecipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="behavior\BehaviorDisconnect.cpp">
       <Filter>Source Files\behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior\attack\AttackRecipe.cpp">
+      <Filter>Source Files\behavior\attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,11 +188,11 @@
     <ClInclude Include="VersionDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="behavior\attack\AttackRecipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="behavior\BehaviorDisconnect.h">
       <Filter>Header Files\behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior\attack\AttackRecipe.h">
+      <Filter>Header Files\behavior\attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

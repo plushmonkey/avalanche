@@ -16,7 +16,7 @@ private:
     s32 m_Delay;
 
 public:
-    BehaviorDelay(mc::core::Client* client);
+    BehaviorDelay(mc::core::Client* client, mc::protocol::Version version);
 
     void OnCreate() override;
     bool OnUpdate() override;

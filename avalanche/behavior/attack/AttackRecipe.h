@@ -10,6 +10,7 @@ namespace avalanche {
 class AttackRecipe : public Behavior, public mc::core::ClientListener, mc::protocol::packets::PacketHandler {
 private:
     mc::core::Client* m_Client;
+    mc::protocol::Version m_Version;
     s32 m_TransactionIndex;
     bool m_Finished;
     bool m_Transaction;
@@ -23,7 +24,7 @@ private:
     void CreateAttack();
 
 public:
-    AttackRecipe(mc::core::Client* client);
+    AttackRecipe(mc::core::Client* client, mc::protocol::Version version);
     ~AttackRecipe();
 
     void OnCreate() override;

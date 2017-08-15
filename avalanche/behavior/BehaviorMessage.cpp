@@ -7,7 +7,7 @@ namespace avalanche {
 
 const char* BehaviorMessage::s_Name = "message";
 
-BehaviorMessage::BehaviorMessage(mc::core::Client* client)
+BehaviorMessage::BehaviorMessage(mc::core::Client* client, mc::protocol::Version version)
     : m_Client(client)
 {
 

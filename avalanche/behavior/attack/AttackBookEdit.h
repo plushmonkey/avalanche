@@ -24,7 +24,7 @@ private:
     void CreateAttack();
 
 public:
-    AttackBookEdit(mc::core::Client* client);
+    AttackBookEdit(mc::core::Client* client, mc::protocol::Version version);
     ~AttackBookEdit();
 
     void OnCreate() override;

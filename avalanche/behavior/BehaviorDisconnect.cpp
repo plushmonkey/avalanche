@@ -7,7 +7,7 @@ namespace avalanche {
 
 const char* BehaviorDisconnect::s_Name = "disconnect";
 
-BehaviorDisconnect::BehaviorDisconnect(mc::core::Client* client)
+BehaviorDisconnect::BehaviorDisconnect(mc::core::Client* client, mc::protocol::Version version)
     : mc::protocol::packets::PacketHandler(client->GetDispatcher()),
       m_Client(client)
 {

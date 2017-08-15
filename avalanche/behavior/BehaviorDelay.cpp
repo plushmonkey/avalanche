@@ -7,7 +7,7 @@ namespace avalanche {
 
 const char* BehaviorDelay::s_Name = "delay";
 
-BehaviorDelay::BehaviorDelay(mc::core::Client* client)
+BehaviorDelay::BehaviorDelay(mc::core::Client* client, mc::protocol::Version version)
     : m_Client(client),
       m_Delay(0)
 {

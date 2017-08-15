@@ -17,7 +17,7 @@ private:
     bool m_Finished;
 
 public:
-    BehaviorSwing(mc::core::Client* client);
+    BehaviorSwing(mc::core::Client* client, mc::protocol::Version version);
 
     void OnCreate() override;
     bool OnUpdate() override;

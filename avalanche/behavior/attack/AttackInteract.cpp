@@ -6,7 +6,7 @@ namespace avalanche {
 
 const char* AttackInteract::s_Name = "interact";
 
-AttackInteract::AttackInteract(mc::core::Client* client)
+AttackInteract::AttackInteract(mc::core::Client* client, mc::protocol::Version version)
     : m_Client(client),
       m_SendPerTick(100),
       m_Finished(false)

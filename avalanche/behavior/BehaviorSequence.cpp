@@ -7,8 +7,9 @@ namespace avalanche {
 
 const char* BehaviorSequence::s_Name = "sequence";
 
-BehaviorSequence::BehaviorSequence(mc::core::Client* client) 
+BehaviorSequence::BehaviorSequence(mc::core::Client* client, mc::protocol::Version version)
     : m_Client(client),
+      m_Version(version),
       m_Index(0),
       m_Repeat(true)
 {
@@ -74,7 +75,7 @@ bool BehaviorSequence::ReadJSON(const Json::Value& node) {
 
         std::string method = methodNode.asString();
 
-        auto child = g_BehaviorFactory.Create(method, m_Client);
+        auto child = g_BehaviorFactory.Create(method, m_Client, m_Version);
         if (!child) {
             std::cerr << "Unknown behavior " << method << " in sequence." << std::endl;
             continue;

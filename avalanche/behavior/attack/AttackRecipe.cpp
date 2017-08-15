@@ -11,12 +11,13 @@ s32 AttackRecipe::s_ReturnCount = 1;
 s32 AttackRecipe::s_PrepareCount = 1;
 mc::inventory::Slot AttackRecipe::s_AttackItem;
 
-AttackRecipe::AttackRecipe(mc::core::Client* client)
+AttackRecipe::AttackRecipe(mc::core::Client* client, mc::protocol::Version version)
     : mc::protocol::packets::PacketHandler(client->GetDispatcher()),
-    m_Client(client),
-    m_TransactionIndex(1),
-    m_Finished(false),
-    m_Transaction(false)
+      m_Client(client),
+      m_Version(version),
+      m_TransactionIndex(1),
+      m_Finished(false),
+      m_Transaction(false)
 {
 
 }
@@ -109,6 +110,10 @@ void AttackRecipe::OnTick() {
 }
 
 bool AttackRecipe::ReadJSON(const Json::Value& attackNode) {
+    if (m_Version != mc::protocol::Version::Minecraft_1_12_0) {
+        throw std::runtime_error("AttackRecipe requires protocol 1.12.0.");
+    }
+
     auto&& methodNode = attackNode["method"];
     if (!methodNode.isString() || methodNode.asString() != s_Name)
         return false;

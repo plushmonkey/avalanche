@@ -8,11 +8,11 @@ namespace avalanche {
 
 const char* BehaviorSneak::s_Name = "sneak";
 
-BehaviorSneak::BehaviorSneak(mc::core::Client* client)
+BehaviorSneak::BehaviorSneak(mc::core::Client* client, mc::protocol::Version version)
     : m_Client(client),
-    m_Start(true),
-    m_Stop(false),
-    m_Finished(false)
+      m_Start(true),
+      m_Stop(false),
+      m_Finished(false)
 {
 
 }

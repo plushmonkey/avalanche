@@ -23,7 +23,7 @@ private:
     mc::inventory::Slot CreateSlotAttack();
 
 public:
-    AttackCreativeWorldLag(mc::core::Client* client);
+    AttackCreativeWorldLag(mc::core::Client* client, mc::protocol::Version version);
     ~AttackCreativeWorldLag();
 
     void OnCreate() override;

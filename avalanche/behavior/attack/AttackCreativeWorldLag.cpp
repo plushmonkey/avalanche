@@ -8,7 +8,7 @@ namespace avalanche {
 const char* AttackCreativeWorldLag::s_Name = "creative-world-lag";
 s32 AttackCreativeWorldLag::s_SendPerTick = 1;
 
-AttackCreativeWorldLag::AttackCreativeWorldLag(mc::core::Client* client)
+AttackCreativeWorldLag::AttackCreativeWorldLag(mc::core::Client* client, mc::protocol::Version version)
     : m_Client(client),  
       m_PositionProvider(std::make_unique<IncrementalPositionProvider>(mc::Vector3i(0, 64, 0), 10, 10)),
       m_Finished(false)

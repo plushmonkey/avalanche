@@ -21,6 +21,7 @@ void VersionDetector::OnPingResponse(const Json::Value& node) {
         { 315, mc::protocol::Version::Minecraft_1_11_0 },
         { 316, mc::protocol::Version::Minecraft_1_11_2 },
         { 335, mc::protocol::Version::Minecraft_1_12_0 },
+        { 338, mc::protocol::Version::Minecraft_1_12_1 },
     };
 
     auto&& versionNode = node["version"];

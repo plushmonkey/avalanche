@@ -15,7 +15,7 @@ private:
     bool m_Finished;
 
 public:
-    BehaviorDisconnect(mc::core::Client* client);
+    BehaviorDisconnect(mc::core::Client* client, mc::protocol::Version version);
 
     void OnCreate() override;
     bool OnUpdate() override;
